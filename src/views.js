@@ -78,6 +78,8 @@ function setUpViews() {
         }
     });
 
+    //I want to specify some different html on the login screen for iOS versus other devices because the screen size is well known
+
     if (Ext.is.iOS) {
         var loginInstructions = '\
                 Login with your Constant Contact User Name and Password.\n\
