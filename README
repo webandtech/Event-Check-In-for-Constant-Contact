@@ -1,0 +1,13 @@
+See the wiki: https://github.com/webandtech/Event-Check-In-for-Constant-Contact/wiki
+
+Get going:
+
+Extract to your local web server (pretty much anything will do).
+
+Due to cross-domain security issues, development / debugging on Chrome with web security disabled is recommended (but stay off other sites while doing this!).
+
+Start Chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --disable-web-security
+
+Load, for example:
+
+http://localhost/index.html
