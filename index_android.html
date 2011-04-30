@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+	<!-- Change this if you want to allow scaling -->
+    <meta name="viewport" content="width=default-width; user-scalable=no" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <title>Event Check-In</title>
+        <link rel="stylesheet" href="sencha/resources/css/android.css" type="text/css">
+        <link rel="stylesheet" href="css/index.css" type="text/css">
+	<script type="text/javascript" src="sencha/sencha-touch.js"></script>
+        <script type="text/javascript" src="ctct-sencha/Ext.CTCT.0.1.full.js"></script>
+        <script type="text/javascript" src="src/models.js"></script>
+        <script type="text/javascript" src="src/views.js"></script>
+        <script type="text/javascript" src="src/controllers.js"></script>
+        <script type="text/javascript" src="src/index.js"></script>
+	<script type="text/javascript" charset="utf-8" src="phonegap.0.9.5.droid.js"></script>
+        <script type="text/javascript" charset="utf-8">
+	function onBodyLoad()
+	{
+                document.addEventListener("deviceready",onDeviceReady,false);
+
+                if (is_chrome > -1) {
+                    onDeviceReady();
+                }
+	}
+    </script>
+  </head>
+  <body onload="onBodyLoad();"></body>
+</html>

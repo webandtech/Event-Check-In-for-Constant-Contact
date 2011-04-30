@@ -1,0 +1,96 @@
+.loginPanel .loginPanelFS {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+.loginButton {
+    margin: .5em;
+}
+
+.topToolbar .x-toolbar-title {
+    margin-top: .5em;
+    font-size: .8em;
+}
+
+.registrantCount {
+    float: right;
+    font-size: .8em;
+    background-image: url(../images/blank_nameTag.png);
+    background-position: center center;
+    background-size: 100%;
+    width:50px;
+    height:35px;
+    text-align: center;
+    padding-top:13px;
+    color: #555555;
+}
+
+.registrantActionButton {
+    margin-top: .5em;
+    margin-botton: .5em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ATTENDED {
+    background-image: url(../images/check.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 12%;
+}
+
+.event {
+    line-height: 1.1em;
+    font-size: .8em;
+}
+
+.event .eventDate {
+    color: #555555;
+}
+
+.event .eventTitle {
+    font-weight: bold;
+}
+
+.appTitle {
+    margin-top: 1em;
+    margin-bottom: .5em;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #4d5361;
+    line-height: 1em;
+}
+
+.titleimgdiv {
+    background-image: url(../images/logo.png);
+    background-size: 100%;
+    float: left;
+    margin-right: .3em;
+    margin-left: 2em;
+    vertical-align: middle;
+    width: 53px;
+    height: 40px;
+}
+
+.appInfo {
+    font-size: .8em;
+    text-align: center;
+    margin-top: 1em;
+    margin-left: .5em;
+    margin-right: .5em;
+
+}
+
+.viralLink {
+    text-decoration: none;
+    color: #12498b;
+}
+
+.x-item-disabled .x-form-label span, .x-item-disabled input, .x-item-disabled .x-spinner-body, .x-item-disabled select, .x-item-disabled textarea, .x-item-disabled .x-field-clear-container {
+    color: #000000;
+    opacity: 1!important;
+}
+
+#emailField div textarea{
+    color: #12498b;
+}
