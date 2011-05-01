@@ -278,8 +278,8 @@ function genericfailuremessage(statusCode) {
         }
         else {
             // 0 is probably due to a lack of internet connection on the device
-            if (statusCode == 0) {
-                if (Ext.is.Android && mainPanel.getActiveItem() == loginPanel) {
+            if (statusCode == 0 || statusCode == 408) {
+                if (mainPanel.getActiveItem() == loginPanel) {
                     Ext.Msg.alert('Login Failed', 'Check your Constant Contact User Name and Password.<br/><br/><br/>'); //Android has http status code issues
                 }
                 else {
