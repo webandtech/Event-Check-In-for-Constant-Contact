@@ -52,7 +52,7 @@ function onDeviceReady() {
 }
 
 function autoLogin() {
-    var username = Ext.CTCT.init('https://api.constantcontact.com', '7be84572-2423-47d0-b62d-4662eaa04c18');
+    var username = Ext.CTCT.init('https://api.constantcontact.com', 'Your API Key');
     if (username != false) {
         refreshEventsList();
     }
@@ -74,14 +74,7 @@ function testNetworkConnection(reachability) {
         states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
         states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
     if (states[networkState] == 'No network connection') {
-        Ext.Msg.show({
-            title : 'You\'re offline!',
-            msg   : 'We weren\'t able to connect to Constant Contact. Try again?',
-            buttons: Ext.MessageBox.OK,
-            icon  : Ext.MessageBox.INFO,
-            defaultTextHeight: 100,
-            fn: tryNetworkConnection
-        });
+        Ext.Msg.alert('You\'re offline!', 'We weren\'t able to connect to Constant Contact. Try again?<br/><br/><br/>', tryNetworkConnection);
         return;
     }
     else {

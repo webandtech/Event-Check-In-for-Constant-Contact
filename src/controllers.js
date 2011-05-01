@@ -28,23 +28,11 @@ function refreshEventsList() {
                         mainPanel.setActiveItem(Ext.getCmp('eventsListPanel'));
                         Ext.getCmp('eventsList').doComponentLayout();
                         if (eventsListStore.getCount() >= 500) {
-                            Ext.Msg.show({
-                                title : 'Woah!',
-                                msg   : 'You\'ve got a lot of events... we\'ll load the first 500.',
-                                buttons: Ext.MessageBox.OK,
-                                icon  : Ext.MessageBox.INFO,
-                                defaultTextHeight: 100
-                            });
+                            Ext.Msg.alert('Woah!', 'You\'ve got a lot of events... we\'ll load the first 500.<br/><br/><br/>');
                         }
                     }
                     else {
-                        Ext.Msg.show({
-                            title : 'No Events',
-                            msg   : 'This Constant Contact account does not have any active events.',
-                            buttons: Ext.MessageBox.OK,
-                            icon  : Ext.MessageBox.INFO,
-                            defaultTextHeight: 100
-                        });
+                        Ext.Msg.alert('No Events', 'This Constant Contact account does not have any active events.<br/><br/><br/>');
                     }
                     mainPanel.setLoading(false);
                 }
@@ -80,23 +68,11 @@ function refreshRegistrantList(eventId) {
                         //force the listview to rebuild itself with the new data
                         Ext.getCmp('eventRegistrantList').doComponentLayout();
                         if (eventsRegistrantsStore.getCount() >= 1000) {
-                            Ext.Msg.show({
-                                title : 'Woah!',
-                                msg   : 'You\'ve got a lot of registrants... we\'ll load the first 1000.',
-                                buttons: Ext.MessageBox.OK,
-                                icon  : Ext.MessageBox.INFO,
-                                defaultTextHeight: 100
-                            });
+                            Ext.Msg.alert('Woah!', 'You\'ve got a lot of registrants... we\'ll load the first 1000.<br/><br/><br/>');
                         }
                     }
                     else {
-                        Ext.Msg.show({
-                            title : 'No Registrants',
-                            msg   : 'This event does not have any registrants.',
-                            buttons: Ext.MessageBox.OK,
-                            icon  : Ext.MessageBox.INFO,
-                            defaultTextHeight: 100
-                        });
+                        Ext.Msg.alert('No Registrants', 'This event does not have any registrants.<br/><br/><br/>');
                         Ext.getCmp('eventsList').deselect(Ext.StoreMgr.lookup('eventsListStore').findRecord('id',eventId));
                     }
                     mainPanel.setLoading(false);
@@ -131,22 +107,10 @@ function updateRegistrantAttendanceStatus(registrantId,newStatus) {
                 registrant.data.registrationStatus = newStatus;
                 eventsRegistrantsStore.insert(registrantIndex,registrant);
                 if (newStatus == 'ATTENDED') {
-                    Ext.Msg.show({
-                        title : 'Done!',
-                        msg   : 'You\'ve checked off ' + registrant.data.firstName + ' ' + registrant.data.lastName + ' as attended.',
-                        buttons: Ext.MessageBox.OK,
-                        icon  : Ext.MessageBox.INFO,
-                        defaultTextHeight: 100
-                    });
+                    Ext.Msg.alert('Done!', 'You\'ve checked off ' + registrant.data.firstName + ' ' + registrant.data.lastName + ' as attended.<br/><br/><br/>', Ext.EmptyFn);
                 }
                 else {
-                    Ext.Msg.show({
-                        title : 'All Set!',
-                        msg   : 'You\'ve switched ' + registrant.data.firstName + ' ' + registrant.data.lastName + '\'s status to "Not Attended".',
-                        buttons: Ext.MessageBox.OK,
-                        icon  : Ext.MessageBox.INFO,
-                        defaultTextHeight: 100
-                    });
+                    Ext.Msg.alert('All Set!', 'You\'ve switched ' + registrant.data.firstName + ' ' + registrant.data.lastName + '\'s status to "Not Attended".<br/><br/><br/>', Ext.EmptyFn);
                 }
             }
             else {genericfailuremessage(response.httpStatusCode);}
@@ -290,7 +254,7 @@ function finishLogOut(confirm) {
 
 //when they click the logout button, show a confirmation dialog
 function doLogout() {
-    Ext.Msg.confirm("Logout", "Are you sure?", finishLogOut);
+    Ext.Msg.confirm("Logout", "Are you sure?<br/><br/><br/><br/>", finishLogOut);
 }
 
 //error handling. Determines an error message to show based on the status code passed back by the Ext.CTCT SDK callbacks
@@ -301,13 +265,7 @@ function genericfailuremessage(statusCode) {
     loginPanel.setLoading(false);
     // if the server reported a status 401, we know the user's credentials are bad so we take them back to the login screen'
     if (statusCode == 401) {
-        Ext.Msg.show({
-            title : 'Login Failed',
-            msg   : 'Check your Constant Contact User Name and Password.',
-            buttons: Ext.MessageBox.OK,
-            icon  : Ext.MessageBox.INFO,
-            defaultTextHeight: 100
-        });
+        Ext.Msg.alert('Login Failed', 'Check your Constant Contact User Name and Password.<br/><br/><br/>');
         // clear any stored credentials in the Ext.CTCT SDK
         Ext.CTCT.logout();
         // show the login screen
@@ -316,45 +274,21 @@ function genericfailuremessage(statusCode) {
     else {
         // 400 is probably due to an event that hasn't started yet
         if (statusCode == 400) {
-            Ext.Msg.show({
-                title : 'Event Not Started',
-                msg   : 'We\'ll see you back soon!',
-                buttons: Ext.MessageBox.OK,
-                icon  : Ext.MessageBox.INFO,
-                defaultTextHeight: 100
-            });
+            Ext.Msg.alert('Event Not Started', 'We\'ll see you back soon!<br/><br/><br/><br/>');
         }
         else {
             // 0 is probably due to a lack of internet connection on the device
             if (statusCode == 0) {
-                if (Ext.is.Android && mainPanel.getActiveItem() == loginPanel) { //but android gives this in lieu of 401 when on login screen
-                    Ext.Msg.show({
-                        title : 'Login Failed',
-                        msg   : 'Check your Constant Contact User Name and Password.',
-                        buttons: Ext.MessageBox.OK,
-                        icon  : Ext.MessageBox.INFO,
-                        defaultTextHeight: 100
-                    });
+                if (Ext.is.Android && mainPanel.getActiveItem() == loginPanel) {
+                    Ext.Msg.alert('Login Failed', 'Check your Constant Contact User Name and Password.<br/><br/><br/>'); //Android has http status code issues
                 }
                 else {
-                    Ext.Msg.show({
-                        title : 'Unable to Connect',
-                        msg   : 'Either you\'re offline... or we are. Please try again.',
-                        buttons: Ext.MessageBox.OK,
-                        icon  : Ext.MessageBox.INFO,
-                        defaultTextHeight: 100
-                    });
+                    Ext.Msg.alert('Unable to Connect', 'Either you\'re offline... or we are. Please try again.<br/><br/><br/>');
                 }
             }
             // catch any others
             else {
-                Ext.Msg.show({
-                    title : 'Yikes!',
-                    msg   : 'An error occurred. Please refresh and try again.',
-                    buttons: Ext.MessageBox.OK,
-                    icon  : Ext.MessageBox.INFO,
-                    defaultTextHeight: 100
-                });
+                Ext.Msg.alert('Yikes!', 'An error occurred. Please refresh and try again.<br/><br/><br/>');
             }
         }
     }
