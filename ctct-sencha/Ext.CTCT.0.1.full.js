@@ -246,12 +246,12 @@ Ext.CTCT = {
                 if (Ext.Ajax.isLoading(thisRequest) == true) {
                     var eventsList = {
                         success: false,
-                        httpStatusCode: 401,
+                        httpStatusCode: 408,
                         events: [],
                         morePages: false
                     }
                     callback(eventsList);
-                    Ext.Ajax.abort(thisRequest);
+                    thisRequest.xhr.abort();
                 }
             }
             setTimeout(function() {failureOnTimeout(callback);},15000);
@@ -379,12 +379,12 @@ Ext.CTCT = {
                 if (Ext.Ajax.isLoading(thisRequest) == true) {
                     var registrantList = {
                         success: false,
-                        httpStatusCode: 401,
+                        httpStatusCode: 408,
                         registrants: [],
                         morePages: false
                     }
                     callback(registrantList);
-                    Ext.Ajax.abort(thisRequest);
+                    thisRequest.xhr.abort();
                 }
             }
             setTimeout(function() {failureOnTimeout(callback);},15000);
@@ -449,10 +449,10 @@ Ext.CTCT = {
                 if (Ext.Ajax.isLoading(thisRequest) == true) {
                     var responseStatus = {
                         success: false,
-                        httpStatusCode: 401
+                        httpStatusCode: 408
                     }
                     callback(responseStatus);
-                    Ext.Ajax.abort(thisRequest);
+                    thisRequest.xhr.abort();
                 }
             }
             setTimeout(function() {failureOnTimeout(callback);},15000);
