@@ -169,6 +169,9 @@ function getRegistrantDetails(index) {
     if (record.data.registrationStatus == 'Not_attended') {
         record.data.registrationStatus = 'Not Attended';
     }
+    if (record.data.paymentStatus == 'Na') {
+        record.data.paymentStatus = 'Not Applicable';
+    }
     registrantDetails.load(record);
     if (record.data.registrationStatus == 'Attended') {
         registrantRedActionButton.show();
