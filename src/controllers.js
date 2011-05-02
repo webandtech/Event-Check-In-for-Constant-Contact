@@ -26,7 +26,9 @@ function refreshEventsList() {
                     if (eventsListStore.getCount() != 0) {
                         eventsListStore.filter();
                         mainPanel.setActiveItem(Ext.getCmp('eventsListPanel'));
-                        Ext.getCmp('eventsList').doComponentLayout();
+                        var eventsList = Ext.getCmp('eventsList');
+                        eventsList.doComponentLayout();
+                        eventsList.plugins[0].lastUpdated = new Date();
                         if (eventsListStore.getCount() >= 500) {
                             Ext.Msg.alert('Woah!', 'You\'ve got a lot of events... we\'ll load the first 500.<br/><br/><br/>');
                         }
@@ -66,7 +68,9 @@ function refreshRegistrantList(eventId) {
                         mainPanel.setActiveItem(Ext.getCmp('eventRegistrantsListPanel'));
                         Ext.getCmp('registrantSearchField').setValue('');
                         //force the listview to rebuild itself with the new data
-                        Ext.getCmp('eventRegistrantList').doComponentLayout();
+                        var eventRegistrantList = Ext.getCmp('eventRegistrantList');
+                        eventRegistrantList.doComponentLayout();
+                        eventRegistrantList.plugins[0].lastUpdated = new Date();
                         if (eventsRegistrantsStore.getCount() >= 1000) {
                             Ext.Msg.alert('Woah!', 'You\'ve got a lot of registrants... we\'ll load the first 1000.<br/><br/><br/>');
                         }
