@@ -465,7 +465,7 @@ function setUpViews() {
         ui: 'decline',
         hidden: true,
         cls: 'registrantActionButton',
-        text: 'Mark Not Attended',
+        text: 'Undo Check-In',
         handler: function() {updateRegistrantAttendanceStatus(registrantIdField.getValue(),'NOT_ATTENDED');}
     });
 
