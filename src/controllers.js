@@ -29,6 +29,7 @@ function refreshEventsList() {
                         var eventsList = Ext.getCmp('eventsList');
                         eventsList.doComponentLayout();
                         eventsList.plugins[0].lastUpdated = new Date();
+                        eventsList.plugins[0].updatedEl.setHTML(Ext.util.Format.date(eventsList.plugins[0].lastUpdated,"m/d/Y h:iA"));
                         if (eventsListStore.getCount() >= 500) {
                             Ext.Msg.alert('Woah!', 'You\'ve got a lot of events... we\'ll load the first 500.<br/><br/><br/>');
                         }
@@ -71,6 +72,7 @@ function refreshRegistrantList(eventId) {
                         var eventRegistrantList = Ext.getCmp('eventRegistrantList');
                         eventRegistrantList.doComponentLayout();
                         eventRegistrantList.plugins[0].lastUpdated = new Date();
+                        eventRegistrantList.plugins[0].updatedEl.setHTML(Ext.util.Format.date(eventRegistrantList.plugins[0].lastUpdated,"m/d/Y h:iA"));
                         if (eventsRegistrantsStore.getCount() >= 1000) {
                             Ext.Msg.alert('Woah!', 'You\'ve got a lot of registrants... we\'ll load the first 1000.<br/><br/><br/>');
                         }
