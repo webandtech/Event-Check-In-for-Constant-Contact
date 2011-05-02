@@ -32,9 +32,7 @@ function onDeviceReady() {
         "images/logo.png",
         "images/ctct-logo.png",
         "images/check.png",
-        "images/blank_nameTag.png",
-        "images/calendar.png",
-        "images/mail.png"
+        "images/blank_nameTag.png"
     );
     
     Ext.setup({ //initialize Sencha Touch and load the models and views
