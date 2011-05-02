@@ -206,7 +206,7 @@ function setUpViews() {
         cls: 'demo-list',
         itemTpl: new Ext.XTemplate(
            '<tpl for=".">',
-                '<div id="reg-{[Ext.StoreMgr.lookup("eventsRegistrantsStore").findExact("emailAddress",values.emailAddress)]}" class="contact {registrationStatus}">',
+                '<div class="contact {registrationStatus}">',
                     '<strong>{lastName}</strong>, {firstName}',
                 '</div>',
           '</tpl>'
