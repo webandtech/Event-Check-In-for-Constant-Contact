@@ -23,10 +23,10 @@ function refreshEventsList() {
                     eventsListStore.add(response.events[a]);
                 }
                 if (response.morePages == false || eventsListStore.getCount() >= 500) {
-                    if (eventsListStore.getCount() != 0) {
-                        eventsListStore.filter();
+                    var eventsList = Ext.getCmp('eventsList');
+                    eventsListStore.filter();
+                    if (eventsList.store.getCount() != 0) {
                         mainPanel.setActiveItem(Ext.getCmp('eventsListPanel'));
-                        var eventsList = Ext.getCmp('eventsList');
                         eventsList.doComponentLayout();
                         eventsList.plugins[0].lastUpdated = new Date();
                         eventsList.plugins[0].updatedEl.setHTML(Ext.util.Format.date(eventsList.plugins[0].lastUpdated,"m/d/Y h:iA"));
@@ -35,7 +35,7 @@ function refreshEventsList() {
                         }
                     }
                     else {
-                        Ext.Msg.alert('No Events', 'This Constant Contact account does not have any active events.<br/><br/><br/>');
+                        Ext.Msg.alert('No Events', 'This account does not have any events ready for check-in. Check back on the day of your event!<br/><br/>');
                     }
                     mainPanel.setLoading(false);
                 }

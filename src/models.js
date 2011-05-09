@@ -19,8 +19,17 @@ function setUpModels() {
         filters: [
         {
             filterFn: function(item) {
+                var today = new Date();
+                var eventDate = new Date(item.data.startDate);
+                var eventEndDate = new Date(item.data.endDate);
+                //only show events that are complete or active (published)
                 if (item.data.status == 'COMPLETE' || item.data.status == 'ACTIVE') {
-                    return item;
+                    //only show events that are today or ended in the last 30 days or started before today and still going on
+                    if (eventDate.toDateString() == today.toDateString() ||
+                    (eventEndDate.getTime() < today.getTime() && eventEndDate.getTime() >= (today.getTime() - 2592000000)) ||
+                    (eventDate.getTime() <= today.getTime() && eventEndDate.getTime() >= today.getTime())) {
+                        return item;
+                    }
                 }
             }
         }],

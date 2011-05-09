@@ -179,7 +179,13 @@ function setUpViews() {
         id: 'eventsListToolBar',
         xtype: 'toolbar',
         title: 'Choose an Event',
-        items: [logOutButton]
+        items: [
+            logOutButton,
+            {xtype: 'spacer'},
+            {iconCls: 'info', iconMask: true, ui: 'plain', handler: function() {
+                Ext.Msg.alert('Events List', 'Today\'s active events as well as those that ended in the past 30 days are shown in this list.<br/><br/>');
+            }}
+        ]
     });
 
     //the panel view that contains the events list plus the toolbar, making up that page
