@@ -22,7 +22,6 @@ function setUpViews() {
     var userNameField = new Ext.form.Text({
        label: 'User Name',
        id: 'userNameField',
-       name: 'userNameField',
        labelWidth: '40%',
        autoComplete: false,
        autoCorrect: false,
@@ -41,7 +40,6 @@ function setUpViews() {
     var passwordField = new Ext.form.Password({
        label: 'Password',
        id: 'passwordField',
-       name: 'passwordField',
        labelWidth: '40%',
        listeners: {
            //on keyup we'll check if they hit the enter key / done button, and if so
@@ -49,14 +47,18 @@ function setUpViews() {
             keyup: function(fld, e){
                 if (e.browserEvent.keyCode == 13) {
                 e.stopEvent();
-                fld.fieldEl.dom.blur();
+                if (Ext.is.Android) {
+                    setTimeout(function() {Ext.getCmp('passwordField').blur();},300); // Android has trouble blurring fields when the keyboard is half open
+                }
+                else {
+                    fld.fieldEl.dom.blur();
+                }
                 Ext.CTCT.login(userNameField.getValue(),passwordField.getValue(),function(){
                     refreshEventsList();
                 });
                 //also clear the fields so if they come back to the login screen they have a clean slate
-                //hack to try to get android to blur the field properly
-                loginPanel.reset().disable();
-                loginPanel.enable();
+                userNameField.reset();
+                passwordField.reset();
                 }
             }
         }
@@ -69,16 +71,18 @@ function setUpViews() {
         handler: function() {
             if (Ext.is.Android) {
                 window.KeyBoard.hideKeyBoard(); // stupid Android... needs me to tell it to close the keyboard!
+                setTimeout(function() {Ext.getCmp('passwordField').blur();Ext.getCmp('userNameField').blur();},300); // Android has trouble blurring fields when the keyboard is half open
             }
-            passwordField.blur();
-            userNameField.blur();
+            else {
+                passwordField.blur();
+                userNameField.blur();
+            }
             //login with callback to get the events list
             Ext.CTCT.login(userNameField.getValue(),passwordField.getValue(),function() {
                 refreshEventsList();
             });
-            //hack to try to get android to blur the field properly
-            loginPanel.reset().disable();
-            loginPanel.enable();
+            userNameField.reset();
+            passwordField.reset();
         }
     });
 
@@ -106,10 +110,9 @@ function setUpViews() {
     }
 
     // assemble the login pagel
-    var loginPanel = new Ext.form.FormPanel({
+    var loginPanel = new Ext.Panel({
         title: 'Login',
         scroll: false,
-        name: 'loginPanel',
         id: 'loginPanel',
         cls: 'loginPanel',
         items: [{
