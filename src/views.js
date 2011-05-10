@@ -47,13 +47,13 @@ function setUpViews() {
             keyup: function(fld, e){
                 if (e.browserEvent.keyCode == 13) {
                 e.stopEvent();
-                fld.fieldEl.dom.blur();
                 Ext.CTCT.login(userNameField.getValue(),passwordField.getValue(),function(){
                     refreshEventsList();
                 });
                 //also clear the fields so if they come back to the login screen they have a clean slate
                 userNameField.reset();
                 passwordField.reset();
+                fld.fieldEl.dom.blur();
                 }
             }
         }
@@ -64,8 +64,6 @@ function setUpViews() {
         id: 'loginButton',
         cls: 'loginButton',
         handler: function() {
-            passwordField.blur();
-            userNameField.blur();
             if (Ext.is.Android) {
                 window.KeyBoard.hideKeyBoard(); // stupid Android... needs me to tell it to close the keyboard!
             }
@@ -75,6 +73,8 @@ function setUpViews() {
             });
             userNameField.reset();
             passwordField.reset();
+            passwordField.blur();
+            userNameField.blur();
         }
     });
 
