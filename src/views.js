@@ -54,6 +54,7 @@ function setUpViews() {
                 //also clear the fields so if they come back to the login screen they have a clean slate
                 userNameField.reset();
                 passwordField.reset();
+                passwordField.disable();
                 }
             }
         }
