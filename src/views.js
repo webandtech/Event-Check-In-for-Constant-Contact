@@ -48,13 +48,17 @@ function setUpViews() {
                 if (e.browserEvent.keyCode == 13) {
                 e.stopEvent();
                 fld.fieldEl.dom.blur();
+                if (Ext.is.Android) {
+                    // android has issues with blurring the field - hack!
+                    passwordField.disable();
+                    setTimeout(function() {Ext.getCmp('passwordField').enable();},500);
+                }
                 Ext.CTCT.login(userNameField.getValue(),passwordField.getValue(),function(){
                     refreshEventsList();
                 });
                 //also clear the fields so if they come back to the login screen they have a clean slate
                 userNameField.reset();
                 passwordField.reset();
-                passwordField.disable();
                 }
             }
         }
@@ -67,6 +71,9 @@ function setUpViews() {
         handler: function() {
             if (Ext.is.Android) {
                 window.KeyBoard.hideKeyBoard(); // stupid Android... needs me to tell it to close the keyboard!
+                // android has issues with blurring the field - hack!
+                passwordField.disable();
+                setTimeout(function() {Ext.getCmp('passwordField').enable();},500);
             }
             passwordField.blur();
             userNameField.blur();
