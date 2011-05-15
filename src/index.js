@@ -50,7 +50,7 @@ function onDeviceReady() {
 }
 
 function autoLogin() {
-    var username = Ext.CTCT.init('https://api.constantcontact.com', '7be84572-2423-47d0-b62d-4662eaa04c18');
+    var username = Ext.CTCT.init('https://api.constantcontact.com', 'YOUR API KEY HERE');
     if (username != false) {
         refreshEventsList();
     }
