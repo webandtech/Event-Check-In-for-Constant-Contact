@@ -52,15 +52,21 @@ function autoLogin() {
     //don't do anything if username == false. The login form will remain on the screen.
 }
 
+
+//we have to test the network connection and alert the user if they're offline or Apple will
+//reject our app. It's easy with phonegap!
 function tryNetworkConnection() {
     if (is_chrome > -1) {
-        autoLogin();
+        autoLogin(); // don't do any of this if user is on Chrome (development mode)
     }
     else {
         navigator.network.isReachable("www.constantcontact.com", testNetworkConnection, {}); //use phonegap apis to check to see if we can reach www.constantcontact.com
     }
 }
 
+
+//this is the callback from navigator.network.isReachable above. Alert the user if offline and
+//try again if they hit OK.
 function testNetworkConnection(reachability) {
     var networkState = reachability.code || reachability;
         var states = {};
