@@ -44,10 +44,12 @@ function onDeviceReady() {
 }
 
 function autoLogin() {
+    //load Ext.CTCT SDK and return a username if it already has stored CTCT credentials (from last login)
     var username = Ext.CTCT.init('https://api.constantcontact.com', 'YOUR API KEY HERE');
     if (username != false) {
         refreshEventsList();
     }
+    //don't do anything if username == false. The login form will remain on the screen.
 }
 
 function tryNetworkConnection() {
