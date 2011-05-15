@@ -8,13 +8,7 @@
  *
  */
 
-/*
- * Detect if the user is using Google Chrome (I use it for development)
- * Try starting Chrome (Mac OS) without cross domain security:
- * /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security
- *
- */
-
+// Detect if the user is using Google Chrome (I use it for development) - see README
 var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome');
 
 function onDeviceReady() {
