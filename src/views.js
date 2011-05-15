@@ -93,20 +93,13 @@ function setUpViews() {
                 Login with your Constant Contact User Name and Password.\n\
                 <br/>\n\
                 <br/>\n\
-                <br/>\n\
-                <br/>\n\
-                <a class="viralLink" href="http://www.constantcontact-event.com/?cc=iOSCheckIn"><img src="images/ctct-logo.png" style="width:220px;height:21px;"/>\n\
-                <br/>\n\
-                Try it FREE. No credit card required.</a>'
+                <div class="appTitle"><a href="http://www.constantcontact-event.com/?cc=iOSCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
     }
     else {
         var loginInstructions = '\
                 Login with your Constant Contact User Name and Password.\n\
                 <br/>\n\
-                <br/>\n\
-                <a class="viralLink" href="http://www.constantcontact-event.com/?cc=droidCheckIn"><img src="images/ctct-logo.png" style="width:220px;height:21px;"/>\n\
-                <br/>\n\
-                Try it FREE. No credit card required.</a>'
+                <div class="appTitle"><a href="http://www.constantcontact-event.com/?cc=droidCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
     }
 
     // assemble the login pagel
@@ -117,11 +110,8 @@ function setUpViews() {
         cls: 'loginPanel',
         items: [{
             html: '\
-                <div class="titleimgdiv"></div>\n\
                 <div class="appTitle">\n\
-                    Event Check-In\n\
-                    <br/>\n\
-                    <span style="font-size: .8em;font-style:italic;">for Constant Contact</span>\n\
+                    <img class="title" src="images/logo.png"/>\n\
                 </div>\n\
                 <div class="appInfo">\n\
                 Super easy attendance tracking<br/> for your Constant Contact events.\n\

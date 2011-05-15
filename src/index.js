@@ -30,7 +30,7 @@ function onDeviceReady() {
     }
     preloadImages(
         "images/logo.png",
-        "images/ctct-logo.png",
+        "images/footer.png",
         "images/check.png",
         "images/blank_nameTag.png"
     );
@@ -50,7 +50,7 @@ function onDeviceReady() {
 }
 
 function autoLogin() {
-    var username = Ext.CTCT.init('https://api.constantcontact.com', 'Your API Key');
+    var username = Ext.CTCT.init('https://api.constantcontact.com', '7be84572-2423-47d0-b62d-4662eaa04c18');
     if (username != false) {
         refreshEventsList();
     }

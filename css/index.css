@@ -55,21 +55,18 @@
 .appTitle {
     margin-top: 1em;
     margin-bottom: .5em;
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #4d5361;
-    line-height: 1em;
+    text-align: center;
+    width:100%;
 }
 
-.titleimgdiv {
-    background-image: url(../images/logo.png);
-    background-size: 100%;
-    float: left;
-    margin-right: .3em;
-    margin-left: 2em;
-    vertical-align: middle;
-    width: 53px;
-    height: 40px;
+.appTitle img.title {
+    width:275px;
+    height:62px;
+}
+
+.appTitle img.footer {
+    width:225px;
+    height:42px;
 }
 
 .appInfo {

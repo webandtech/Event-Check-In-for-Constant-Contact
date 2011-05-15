@@ -35,6 +35,10 @@ function refreshEventsList() {
                         }
                     }
                     else {
+                        mainPanel.setActiveItem(Ext.getCmp('eventsListPanel'));
+                        eventsList.doComponentLayout();
+                        eventsList.plugins[0].lastUpdated = new Date();
+                        eventsList.plugins[0].updatedEl.setHTML(Ext.util.Format.date(eventsList.plugins[0].lastUpdated,"m/d/Y h:iA"));
                         Ext.Msg.alert('No Events', 'This account does not have any events ready for check-in. Check back on the day of your event!<br/><br/>');
                     }
                     mainPanel.setLoading(false);
