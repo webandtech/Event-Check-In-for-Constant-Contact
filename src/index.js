@@ -8,13 +8,7 @@
  *
  */
 
-/*
- * Detect if the user is using Google Chrome (I use it for development)
- * Try starting Chrome (Mac OS) without cross domain security:
- * /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security
- *
- */
-
+// Detect if the user is using Google Chrome (I use it for development) - see README
 var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome');
 
 function onDeviceReady() {
@@ -50,21 +44,29 @@ function onDeviceReady() {
 }
 
 function autoLogin() {
-    var username = Ext.CTCT.init('https://api.constantcontact.com', '7be84572-2423-47d0-b62d-4662eaa04c18');
+    //load Ext.CTCT SDK and return a username if it already has stored CTCT credentials (from last login)
+    var username = Ext.CTCT.init('https://api.constantcontact.com', 'YOUR API KEY HERE');
     if (username != false) {
         refreshEventsList();
     }
+    //don't do anything if username == false. The login form will remain on the screen.
 }
 
+
+//we have to test the network connection and alert the user if they're offline or Apple will
+//reject our app. It's easy with phonegap!
 function tryNetworkConnection() {
     if (is_chrome > -1) {
-        autoLogin();
+        autoLogin(); // don't do any of this if user is on Chrome (development mode)
     }
     else {
         navigator.network.isReachable("www.constantcontact.com", testNetworkConnection, {}); //use phonegap apis to check to see if we can reach www.constantcontact.com
     }
 }
 
+
+//this is the callback from navigator.network.isReachable above. Alert the user if offline and
+//try again if they hit OK.
 function testNetworkConnection(reachability) {
     var networkState = reachability.code || reachability;
         var states = {};
