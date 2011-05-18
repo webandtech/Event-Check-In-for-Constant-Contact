@@ -12,7 +12,7 @@
 var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome');
 
 function onDeviceReady() {
-    if (Ext.is.iOS) {
+    if (Ext.is.iOS && is_chrome == -1) {
         window.plugins.splashScreen.show(); //show the splash screen while the Ext framework is loaded
     }
     var preloadedImages = new Array(); //preload images before showing anything for a better UX
@@ -33,7 +33,7 @@ function onDeviceReady() {
         onReady: function() {
             setUpModels();
             setUpViews();
-            if (Ext.is.iOS) {
+            if (Ext.is.iOS && is_chrome == -1) {
                 window.plugins.splashScreen.hide(); //The view has been loaded - hide the splash screen
             }
             tryNetworkConnection(); //Test the internet connection and alert the user if they're offline (and thus can't use the app)
@@ -45,7 +45,7 @@ function onDeviceReady() {
 
 function autoLogin() {
     //load Ext.CTCT SDK and return a username if it already has stored CTCT credentials (from last login)
-    var username = Ext.CTCT.init('https://api.constantcontact.com', 'YOUR API KEY HERE');
+    var username = Ext.CTCT.init('https://api.constantcontact.com', '7be84572-2423-47d0-b62d-4662eaa04c18');
     if (username != false) {
         refreshEventsList();
     }

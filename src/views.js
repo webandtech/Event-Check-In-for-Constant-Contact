@@ -69,7 +69,7 @@ function setUpViews() {
         id: 'loginButton',
         cls: 'loginButton',
         handler: function() {
-            if (Ext.is.Android) {
+            if (Ext.is.Android && is_chrome == -1) {
                 window.KeyBoard.hideKeyBoard(); // stupid Android... needs me to tell it to close the keyboard!
                 // android has issues with blurring the field - hack!
                 passwordField.disable();
@@ -93,14 +93,23 @@ function setUpViews() {
                 Login with your Constant Contact User Name and Password.\n\
                 <br/>\n\
                 <br/>\n\
-                <div class="appTitle"><a href="http://www.constantcontact-event.com/?cc=iOSCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
+                <div class="appTitle"><a href="http://m.constantcontact.com/event-marketing/index.jsp?cc=iOSCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
     }
     else {
-        var loginInstructions = '\
+        if (is_chrome > -1) {
+            var loginInstructions = '\
                 Login with your Constant Contact User Name and Password.\n\
                 <br/>\n\
-                <div class="appTitle"><a href="http://www.constantcontact-event.com/?cc=droidCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
+                <div class="appTitle"><a href="http://m.constantcontact.com/event-marketing/index.jsp?cc=webAppCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
+        }
+        else {
+            var loginInstructions = '\
+                Login with your Constant Contact User Name and Password.\n\
+                <br/>\n\
+                <div class="appTitle"><a href="http://m.constantcontact.com/event-marketing/index.jsp?cc=droidCheckIn" target="_blank"><img class="footer" src="images/footer.png"/></a></div>'
+        }
     }
+
 
     // assemble the login pagel
     var loginPanel = new Ext.Panel({
@@ -227,7 +236,7 @@ function setUpViews() {
 
     // show a registrant details panel when tapping a registrant
     eventRegistrantList.on('itemtap', function(dataview, index, el, e) {
-        if (Ext.is.Android && Ext.getCmp('registrantSearchField').getValue() != '') {
+        if (Ext.is.Android && Ext.getCmp('registrantSearchField').getValue() != '' && is_chrome == -1) {
             Ext.getCmp('registrantSearchField').blur();
             window.KeyBoard.hideKeyBoard(); // stupid Android... needs me to tell it to close the keyboard!
             setTimeout(function() {getRegistrantDetails(index);},300); // if you do this too quickly after keyboard close, Android barfs all over itself.

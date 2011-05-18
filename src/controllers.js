@@ -196,7 +196,7 @@ function getRegistrantDetails(index) {
     var emailField = Ext.getCmp('emailField');
     Ext.get('emailField').removeAllListeners();
     Ext.get('emailField').on('tap',function() {
-        if (Ext.is.iOS) {
+        if (Ext.is.iOS && is_chrome == -1) {
             window.plugins.emailComposer.showEmailComposer(undefined,undefined,emailField.getValue());
         }
         else {
