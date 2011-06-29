@@ -187,12 +187,35 @@ function setUpViews() {
         xtype: 'toolbar',
         title: 'Choose an Event',
         items: [
-            logOutButton,
-            {xtype: 'spacer'},
-            {iconCls: 'info', iconMask: true, ui: 'plain', handler: function() {
-                Ext.Msg.alert('Events List', 'Today\'s active events as well as those that ended in the past 30 days are shown in this list.<br/><br/>');
-            }}
+            logOutButton
         ]
+    });
+
+    //filter options toolbar at the top of the events list
+    var eventsListFilterButtons = new Ext.SegmentedButton({
+        items: [
+            {
+                text: 'Browse All',
+                pressed: true,
+                handler: function() {
+                    filterEventsList(false);
+                }
+            },
+            {
+                text   : 'Ready for Check-In',
+                handler: function() {
+                    filterEventsList(true);
+                }
+            }
+        ]
+    });
+
+    var eventsListFilterBar = new Ext.Toolbar ({
+        dock: 'top',
+        cls: 'topToolbar',
+        id: 'eventsListFilterBar',
+        xtype: 'toolbar',
+        items: [{xtype: 'spacer'},eventsListFilterButtons,{xtype: 'spacer'}]
     });
 
     //the panel view that contains the events list plus the toolbar, making up that page
@@ -200,7 +223,7 @@ function setUpViews() {
         id: 'eventsListPanel',
         layout: 'fit',
         items: [eventsList],
-        dockedItems: [eventsListToolBar]
+        dockedItems: [eventsListToolBar,eventsListFilterBar]
     });
 
     /*

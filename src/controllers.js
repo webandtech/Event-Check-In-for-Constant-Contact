@@ -24,7 +24,7 @@ function refreshEventsList() {
                 }
                 if (response.morePages == false || eventsListStore.getCount() >= 500) {
                     var eventsList = Ext.getCmp('eventsList');
-                    eventsListStore.filter();
+                    filterEventsList(false);
                     if (eventsList.store.getCount() != 0) {
                         mainPanel.setActiveItem(Ext.getCmp('eventsListPanel'));
                         eventsList.doComponentLayout();
@@ -39,7 +39,7 @@ function refreshEventsList() {
                         eventsList.doComponentLayout();
                         eventsList.plugins[0].lastUpdated = new Date();
                         eventsList.plugins[0].updatedEl.setHTML(Ext.util.Format.date(eventsList.plugins[0].lastUpdated,"m/d/Y h:iA"));
-                        Ext.Msg.alert('No Events', 'This account does not have any events ready for check-in. Check back on the day of your event!<br/><br/>');
+                        Ext.Msg.alert('No Events', 'This account does not have any events.<br/><br/><br/>');
                     }
                     mainPanel.setLoading(false);
                 }
@@ -51,6 +51,44 @@ function refreshEventsList() {
         },page);
     }
     makeRequest(1);
+}
+
+//filter the events list to show all events (false) or just events that are ready for check-in (true)
+function filterEventsList(filter) {
+    var eventsListStore = Ext.StoreMgr.lookup('eventsListStore');
+    if (filter) {
+        var eventsFilter = new Ext.util.Filter({
+            filterFn: function(item) {
+                var today = new Date();
+                var eventDate = new Date(item.data.startDate);
+                var eventEndDate = new Date(item.data.endDate);
+                //only show events that are complete or active (published)
+                if (item.data.status == 'COMPLETE' || item.data.status == 'ACTIVE') {
+                    //only show events that are today or ended in the last 30 days or started before today and still going on
+                    if (eventDate.toDateString() == today.toDateString() ||
+                    (eventEndDate.getTime() < today.getTime()) ||
+                    (eventDate.getTime() <= today.getTime() && eventEndDate.getTime() >= today.getTime())) {
+                        return item;
+                    }
+                }
+            }
+        });
+        eventsListStore.filter(eventsFilter);
+    }
+    else {
+        //I still want to filter for event status so cancelled and deleted events don't show up
+        eventsListStore.clearFilter();
+        var allEventsFilter = new Ext.util.Filter({
+            filterFn: function(item) {
+                //only show events that are complete or active (published)
+                if (item.data.status == 'COMPLETE' || item.data.status == 'ACTIVE') {
+                        return item;
+                }
+            }
+        });
+        eventsListStore.filter(allEventsFilter);
+    }
+    eventsListStore.sort();
 }
 
 //gets a list of registrants for an event and shows them this list
@@ -284,7 +322,7 @@ function genericfailuremessage(statusCode) {
     else {
         // 400 is probably due to an event that hasn't started yet
         if (statusCode == 400) {
-            Ext.Msg.alert('Event Not Started', 'We\'ll see you back soon!<br/><br/><br/><br/>');
+            Ext.Msg.alert('Event Not Started', 'You can\'t check people into this event because it hasn\'t started. We\'ll see you back soon!<br/><br/>');
         }
         else {
             // 0 is probably due to a lack of internet connection on the device
